@@ -1,0 +1,90 @@
+<h1 class="insetshadow">Welcome {{ name }}</h1>
+<div id="menu">
+  <ul>
+    <li><a href="/wishlist">Wishlist</a></li>
+    <li><a href="">Exit</a></li>
+  </ul>
+</div>
+
+<!-- search bar -->
+
+<div class="wrap">
+  <div class="search">
+    <input
+      type="text"
+      class="searchTerm"
+      [(ngModel)]="books"
+      placeholder="what are you looking for ?"
+    />
+    <select
+      name=""
+      class="searchTerm"
+      id=""
+      (change)="onChangeOption($event.target.value)"
+    >
+      <option></option>
+      <option>Intitle</option>
+      <option>Inauthor</option>
+      <option>Inpublisher</option>
+      <option>Subject</option>
+    </select>
+    <button type="submit" class="searchTerm" (click)="showBooks(books)">
+      ok
+    </button>
+  </div>
+</div>
+<br />
+
+<!-- table -->
+
+<div class="header">you are looking {{ books }} By {{ event }}</div>
+
+<table cellspacing="0" class="wrapper">
+  <tr>
+    <th>Picture</th>
+    <th>Title</th>
+    <th>Authors</th>
+    <th>Published Date</th>
+    <th>more Info</th>
+    <th>Add to Wishlist</th>
+  </tr>
+
+  <tr *ngFor="let input of booksService.booksResult.items">
+    <td>
+      <img src="{{ input.volumeInfo.imageLinks.smallThumbnail }}" alt="" />
+    </td>
+    <td>{{ checkValue(input.volumeInfo.title) }}</td>
+    <td>{{ checkValue(input.volumeInfo.authors) }}</td>
+    <td>{{ checkValue(input.volumeInfo.publishedDate) }}</td>
+    <td>
+      <label
+        class="searchButton"
+        (click)="informationById(input.volumeInfo.description)"
+        for="modal-toggle"
+        >Info</label
+      >
+    </td>
+    <td>
+      <button
+        type="submit"
+        class="searchButton"
+        (click)="addFavorites(input.id)"
+      >
+        add
+      </button>
+    </td>
+  </tr>
+</table>
+
+<!-- modal -->
+
+<div class="modal-container">
+  <input id="modal-toggle" type="checkbox" />
+  <label class="modal-backdrop" for="modal-toggle"></label>
+  <div *ngIf="all != {}" class="modal-content">
+    <label class="modal-close" for="modal-toggle">&#x2715;</label>
+    <p>Description</p>
+    <h2>{{ checkValue(description) }}</h2>
+    <label class="modal-content-btn" for="modal-toggle">OK</label>
+  </div>
+</div>

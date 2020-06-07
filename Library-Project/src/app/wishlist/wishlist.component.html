@@ -1,0 +1,39 @@
+<h1 class="insetshadow">Wish list of {{ name }}</h1>
+<div id="menu">
+  <ul>
+    <li><a href="/search">Home</a></li>
+    <li><a href="">Exit</a></li>
+  </ul>
+</div>
+
+<br />
+<!-- table -->
+
+<table cellspacing="0" class="wrapper">
+  <tr>
+    <th>Picture</th>
+    <th>Title</th>
+    <th>Authors</th>
+    <th>Published Date</th>
+    <th>selfLink</th>
+  </tr>
+
+  <tr *ngFor="let input of currentConditionsList">
+    <td>
+      <img src="{{ input.volumeInfo.imageLinks.smallThumbnail }}" alt="" />
+    </td>
+    <td>{{ input.volumeInfo.title }}</td>
+    <td>{{ input.volumeInfo.authors }}</td>
+    <td>{{ input.volumeInfo.publishedDate }}</td>
+    <td><a href="{{ input.volumeInfo.previewLink }}">Link</a></td>
+    <td>
+      <button
+        type="submit"
+        class="searchButton"
+        (click)="removeFromFavorites(input.id)"
+      >
+        <a href="/wishlist">Remove</a>
+      </button>
+    </td>
+  </tr>
+</table>
