@@ -19,7 +19,3 @@
 3. Wishlist page: 
 * show all the Wishlist items with the option to remove from the Wishlist. 
 
-## Links
-
-- Project homepage: https://github.com/AmosZit/Library-Project/tree/master/src/app
- 
